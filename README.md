@@ -1,6 +1,6 @@
 # Graph Matching Toolkit 
 
-**Author:** Riesen Kaspar `<kaspar.riesen@fhnw.ch>` 
+**Author:** Riesen Kaspar 
 
 ---
 
@@ -25,9 +25,22 @@ Run the graph matching as a java application. The main method is in `GraphMatchi
 
 All notable changes to the original code of Kaspar are here documented.
 
-#### 1.0.1 (2016-05-08) `e833baa`
+#### 1.1.0 (2017-10-05) `...`
+* Lighter consol output.
+* Exception handling to debug problem with parsing the properties file.
+* More details in the result file and.
+* More comments about how to set the properties in `properties_letter.prop`.
+
+#### 1.0.1 (2017-06-27) `0b51e0f`
 * Implemented the cost function for `csvDouble`, namely attributes in the form `[double, double, ... , double]`.
 * Inserted this changelog in the README.
 
-#### 1.0.0 (2016-05-08) `e833baa`
+#### 1.0.0 (2017-01-30) `e833baa`
 * Version provided to me by Kaspar Riesen.
+
+---
+
+### Discalimer
+
+The author of the source code is Kaspar Riesen. 
+Daniele Zambon ([dan-zam](https://github.com/dan-zam)) is only the owner of the github repository.

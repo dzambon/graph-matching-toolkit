@@ -17,7 +17,7 @@ public class ResultPrinter {
 	/**
 	 * where the results are printed
 	 */
-	private String resultFolder;
+	private String resultFile;
 
 
 	/**
@@ -33,11 +33,11 @@ public class ResultPrinter {
 	
 	/**
 	 * constructs a ResultPrinter 
-	 * @param resultFolder
+	 * @param resultFile
 	 * @param properties
 	 */
-	public ResultPrinter(String resultFolder, Properties properties) {
-		this.resultFolder = resultFolder;
+	public ResultPrinter(String resultFile, Properties properties) {
+		this.resultFile = resultFile;
 		this.properties = properties;
 		
 	}
@@ -51,12 +51,16 @@ public class ResultPrinter {
 		this.decFormat = (DecimalFormat) NumberFormat
 				.getInstance(Locale.ENGLISH);
 		this.decFormat.applyPattern("0.00000");
+
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
+		Calendar cal = Calendar.getInstance(); // +"_"+dateFormat.format(cal.getTime())
 		
-		String resultName = this.resultFolder+".txt";
+		String resultName = this.resultFile;
 		PrintWriter out;
 		try {
 			out = new PrintWriter(new FileOutputStream(resultName));
 			out.println("#*** The properties of the matching ***");
+			out.println("#Date of the computation:\t"+dateFormat.format(cal.getTime()));
 			out.println("#Source graph set:\t"+this.properties.getProperty("source")+" ("+d.length+" graphs)");
 			out.println("#Target graph set:\t"+this.properties.getProperty("target")+" ("+d[0].length+" graphs)");
 			out.println("#Graph edit distance procedure:\t"+this.properties.getProperty("matching"));
@@ -131,7 +135,7 @@ public class ResultPrinter {
 			
 			switch (simKernel){
 				case 0:
-					out.println("#*** The distance matrix ***");
+					out.println("#\n#*** The distance matrix ***");
 					break;
 				case 1:
 					out.println("\n*** The similarity matrix (-d^2) ***\n");break;
@@ -142,6 +146,8 @@ public class ResultPrinter {
 				case 4:
 					out.println("\n*** The similarity matrix exp(-d) ***\n");break;
 			}
+			out.println("# \t... data is printed in the following order ((s)ource,(t)arget):"
+					+"\n#\t\t[d(s1,t1); d(s1,t2); d(s1,t3); ... d(s1,tn); d(s2,t1); d(s2,t2);...]"); 
 			
 			for (int i = 0; i < d.length; i++){
 				for (int j = 0; j < d[0].length; j++){
@@ -165,13 +171,14 @@ public class ResultPrinter {
 		this.decFormat = (DecimalFormat) NumberFormat
 				.getInstance(Locale.ENGLISH);
 		this.decFormat.applyPattern("0.00000");
-		DateFormat dateFormat = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");
 		Calendar cal = Calendar.getInstance(); // +"_"+dateFormat.format(cal.getTime())
-		String resultName = this.resultFolder+".txt";
+		String resultName = this.resultFile;
 		PrintWriter out;
 		try {
 			out = new PrintWriter(new FileOutputStream(resultName));
 			out.println("#*** The properties of the matching ***");
+			out.println("#Date of the computation:\t"+dateFormat.format(cal.getTime()));
 			out.println("#Source graph set:\t"+this.properties.getProperty("source")+" ("+d.length+" graphs)");
 			out.println("#Target graph set:\t"+this.properties.getProperty("target")+" ("+d[0].length+" graphs)");
 			out.println("#Graph edit distance procedure:\t"+this.properties.getProperty("matching"));

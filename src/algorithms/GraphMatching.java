@@ -124,6 +124,7 @@ public class GraphMatching {
 	 */
 	@SuppressWarnings("unused")
 	public static void main(String[] properties) {
+		System.out.println("--- GMT - v-1.1.0 ---");
 		try {
 			GraphMatching graphMatching = new GraphMatching(properties[0]);
 		} catch (Exception e) {
@@ -139,7 +140,7 @@ public class GraphMatching {
 	 */
 	public GraphMatching(String prop) throws Exception {
 		// initialize the matching
-		System.out.println("Initializing the matching according to the properties...");
+		System.out.println("Init from properties...");
 		this.init(prop);
 		// the cost matrix used for bipartite matchings
 		double[][] costMatrix;
@@ -148,8 +149,7 @@ public class GraphMatching {
 		this.counter = 0;
 
 		// iterate through all pairs of graphs g_i x g_j from (source, target)
-		System.out.println("Starting the matching...");
-		System.out.println("Progress...");
+		System.out.println("Matching...");
 		int numOfMatchings = this.source.size() * this.target.size();
 		int numOfFails = 0;
 		// distance value d
@@ -165,8 +165,7 @@ public class GraphMatching {
 				swapped = false;
 				targetGraph = this.target.get(j);
 				this.counter++;
-				System.out.println("Matching "+counter+" of "+numOfMatchings+" (sizes: "+sourceGraph.size()+", "+targetGraph.size()+")");
-
+				System.out.print("\r"+counter+"/"+numOfMatchings+" ("+sourceGraph.size()+"vs"+targetGraph.size()+")    ");
 				// log the current graphs on the console
 				if (this.outputGraphs == 1) {
 					System.out.println("The Source Graph:");
@@ -237,9 +236,10 @@ public class GraphMatching {
 		long endingTime = System.currentTimeMillis();
 		long matchingTime = endingTime - startTime;
 		// printing the distances or similarities
-		System.out.println("Printing the results...");
+		System.out.println("\nPrinting the results...");
 		this.resultPrinter.printResult(this.distanceMatrix, matchingTime, numOfFails);
 		//		this.resultPrinter.printResult(this.distanceMatrix, this.assignmentCostMatrix, matchingTime, numOfFails);
+		System.out.println("Done!");
 	}
 
 
@@ -267,7 +267,7 @@ public class GraphMatching {
 		properties.load(new FileInputStream(prop));
 
 		// define result folder
-		String resultFolder = properties.getProperty("result");
+		String resultFile = properties.getProperty("result");
 
 		// the node and edge costs, the relative weighting factor alpha
 		double node = Double.parseDouble(properties.getProperty("node"));
@@ -296,8 +296,14 @@ public class GraphMatching {
 			nodeAttributes[i] = properties.getProperty("nodeAttr" + i);
 			nodeCostTypes[i] = properties.getProperty("nodeCostType" + i);
 			if (nodeCostTypes[i].equals("discrete")){
-				nodeCostMu[i]=Double.parseDouble(properties.getProperty("nodeCostMu" + i));
-				nodeCostNu[i]=Double.parseDouble(properties.getProperty("nodeCostNu" + i));
+				try{
+					nodeCostMu[i]=Double.parseDouble(properties.getProperty("nodeCostMu" + i));
+					nodeCostNu[i]=Double.parseDouble(properties.getProperty("nodeCostNu" + i));
+				} catch (Exception e) {
+					System.out.println("dz: probably you forgot nodeCostMu nodeCostNu" );
+	//				e.printStackTrace();
+					throw e;			
+				}
 			}
 			if  (!nodeCostTypes[i].equals("coil")){
 				nodeAttrImportance[i] = Double.parseDouble(properties
@@ -318,16 +324,33 @@ public class GraphMatching {
 
 
 		// whether or not the costs are "p-rooted"
-		double squareRootNodeCosts = Double.parseDouble(properties
+		double squareRootNodeCosts;
+		double squareRootEdgeCosts;
+		try{
+			squareRootNodeCosts = Double.parseDouble(properties
 				.getProperty("pNode"));
-		double squareRootEdgeCosts = Double.parseDouble(properties
+			squareRootEdgeCosts = Double.parseDouble(properties
 				.getProperty("pEdge"));
-
+		} catch (Exception e) {
+			System.out.println("dz: problem in p-root (node _ edge): " + properties.getProperty("pNode") + " _ " + properties.getProperty("pEdge") );
+//			e.printStackTrace();
+			throw e;
+		}
+		
+		
 		// whether costs are multiplied or summed
-		int multiplyNodeCosts = Integer.parseInt(properties
+		int multiplyNodeCosts;
+		int multiplyEdgeCosts;
+		try{
+			multiplyNodeCosts = Integer.parseInt(properties
 				.getProperty("multiplyNodeCosts"));
-		int multiplyEdgeCosts = Integer.parseInt(properties
+			multiplyEdgeCosts = Integer.parseInt(properties
 				.getProperty("multiplyEdgeCosts"));
+		} catch (Exception e) {
+			System.out.println("dz: problem in  multiplyed of summed (node _ edge): " + properties.getProperty("multiplyNodeCosts") + " _ " + properties.getProperty("multiplyEdgeCosts") );
+	//		e.printStackTrace();
+			throw e;
+		}
 
 		// what is logged on the console (graphs, cost-matrix, matching, edit path)
 		this.outputGraphs = Integer.parseInt(properties
@@ -380,13 +403,12 @@ public class GraphMatching {
 		this.editDistance = new EditDistance(this.undirected, this.outputEditpath);
 
 		// the resultPrinter prints the properties and the distances found		
-		this.resultPrinter = new ResultPrinter(resultFolder, properties);
+		this.resultPrinter = new ResultPrinter(resultFile, properties);
 
 		// whether or not a similarity is derived from the distances 
 		this.simKernel=Integer.parseInt(properties.getProperty("simKernel"));
 
 		// load the source and target set of graphs
-		System.out.println("Load the source and target graph sets...");
 		XMLParser xmlParser = new XMLParser();
 		xmlParser.setGraphPath(properties.getProperty("path"));
 		String sourceString = properties.getProperty("source");

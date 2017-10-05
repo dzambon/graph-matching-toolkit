@@ -101,6 +101,9 @@ public class CostFunction {
 	public double getCost(Node u, Node v) {
 		double cost = 0;
 		for (int i = 0; i < this.nodeAttributes.length; i++) {
+
+			boolean costTypeFound = false;
+			
 			if (this.nodeCostTypes[i].equals("coil")) {
 				double u_x = Double.parseDouble(u
 						.getValue("histo"+(i+1)));
@@ -111,6 +114,7 @@ public class CostFunction {
 				} else {
 					cost += (Math.abs((u_x - v_x)));
 				}
+				costTypeFound = true;
 			}
 			if (this.nodeCostTypes[i].equals("squared")) {
 				double u_x = Double.parseDouble(u
@@ -124,6 +128,7 @@ public class CostFunction {
 					cost += (Math.pow((u_x - v_x), 2.)
 							* this.nodeAttrImportance[i]);
 				}
+				costTypeFound = true;
 			}
 			if (this.nodeCostTypes[i].equals("absolute")) {
 				double u_x = Double.parseDouble(u
@@ -136,6 +141,7 @@ public class CostFunction {
 					cost += (Math.abs((u_x - v_x)) * this.nodeAttrImportance[i]);
 				}
 
+				costTypeFound = true;
 			}
 			if (this.nodeCostTypes[i].equals("discrete")) {
 				String u_x = u.getValue(this.nodeAttributes[i]);
@@ -154,6 +160,7 @@ public class CostFunction {
 						cost += (this.nodeCostNu[i] * this.nodeAttrImportance[i]);
 					}
 				}
+				costTypeFound = true;
 			}
 			if (this.nodeCostTypes[i].equals("discreteGREC")) {
 				String u_x = u.getValue(this.nodeAttributes[i]);
@@ -161,6 +168,7 @@ public class CostFunction {
 				if (!u_x.equals(v_x)) {
 					cost = Math.pow(2*this.nodeCost, this.pNode); // replace euclidean distance by (2*nodeCosts)^2
 				} 
+				costTypeFound = true;
 			}
 			
 			if (this.nodeCostTypes[i].equals("sed")) {
@@ -173,6 +181,7 @@ public class CostFunction {
 					cost += (this.stringEditDistance(u_x, v_x)
 							* this.nodeAttrImportance[i]);
 				}
+				costTypeFound = true;
 			}
 			
 			//dz: coma separated double values 
@@ -190,10 +199,15 @@ public class CostFunction {
 				} else {
 					cost += sum * this.nodeAttrImportance[i];
 				}
+				costTypeFound = true;
 			}
+			
+			if(!costTypeFound)
+				throw new IllegalArgumentException("cost type <"+this.nodeCostTypes[i]+"> not found.");
+			
 
 		}
-		
+
 		cost = Math.pow(cost, (1/this.pNode));
 		cost *= this.alpha;
 		return cost;
@@ -211,6 +225,10 @@ public class CostFunction {
 	public double getCost(Edge u, Edge v) {
 		double cost = 0;
 		for (int i = 0; i < this.edgeAttributes.length; i++) {
+			
+			
+			boolean costTypeFound = false;
+			
 			if (this.edgeCostTypes[i].equals("dummy")) {
 				// nothing to do
 			}
@@ -226,6 +244,7 @@ public class CostFunction {
 					cost += Math.pow((u_x - v_x), 2.)
 							* this.edgeAttrImportance[i];
 				}
+				costTypeFound = true;
 			}
 			if (this.edgeCostTypes[i].equals("absolute")) {
 				double u_x = Double.parseDouble(u
@@ -238,6 +257,7 @@ public class CostFunction {
 					cost += Math.abs((u_x - v_x)) * this.edgeAttrImportance[i];
 				}
 
+				costTypeFound = true;
 			}
 			if (this.edgeCostTypes[i].equals("discrete")) {
 				String u_x = u.getValue(this.edgeAttributes[i]);
@@ -256,6 +276,7 @@ public class CostFunction {
 						cost += this.edgeCostNu[i] * this.edgeAttrImportance[i];
 					}
 				}
+				costTypeFound = true;
 			}
 			
 			if (this.edgeCostTypes[i].equals("sed")) {
@@ -268,6 +289,7 @@ public class CostFunction {
 					cost += this.stringEditDistance(u_x, v_x)
 							* this.edgeAttrImportance[i];
 				}
+				costTypeFound = true;
 			}
 			if (this.edgeCostTypes[i].equals("fingerprint")) {
 				
@@ -281,8 +303,8 @@ public class CostFunction {
 					cost += dist * this.edgeAttrImportance[i];
 				}
 				
+				costTypeFound = true;
 			}
-
 			//dz: coma separated double values 
 			if (this.edgeCostTypes[i].equals("csvDouble")) {
 				double[] u_x= dzParseCSVDouble(u
@@ -298,7 +320,11 @@ public class CostFunction {
 				} else {
 					cost += sum * this.edgeAttrImportance[i];
 				}
+				costTypeFound = true;
 			}
+
+			if(!costTypeFound)
+				throw new IllegalArgumentException("cost type <"+this.edgeCostTypes[i]+"> not found.");
 
 		}
 		
@@ -362,7 +388,6 @@ public class CostFunction {
 
 	
 
-	//dz: 
 	static public double[] dzParseCSVDouble(String str){
 		String delims = "[\\[,\\]]";
 		String[] tokens = str.split(delims);
