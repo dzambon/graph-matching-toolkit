@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<GraphCollection>
+<graphs>
+<print file="AP1_0050.gxl" class="A"/>
+<print file="AP1_0051.gxl" class="A"/>
+<print file="AP1_0052.gxl" class="A"/>
+<print file="FP1_0085.gxl" class="F"/>
+<print file="FP1_0086.gxl" class="F"/>
+<print file="FP1_0087.gxl" class="F"/>
+<print file="HP1_0073.gxl" class="H"/>
+<print file="HP1_0074.gxl" class="H"/>
+<print file="HP1_0075.gxl" class="H"/>
+<print file="HP1_0076.gxl" class="H"/>
+<print file="KP1_0085.gxl" class="K"/>
+<print file="KP1_0086.gxl" class="K"/>
+<print file="KP1_0087.gxl" class="K"/>
+<print file="KP1_0088.gxl" class="K"/>
+</graphs>
+</GraphCollection>
