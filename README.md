@@ -25,7 +25,7 @@ Run the graph matching as a java application. The main method is in `GraphMatchi
 
 All notable changes to the original code of Kaspar are here documented.
 
-#### 1.1.0 (2017-10-05) `...`
+#### 1.1.0 (2017-10-05) `b16d7f4`
 * Lighter consol output.
 * Exception handling to debug problem with parsing the properties file.
 * More details in the result file and.

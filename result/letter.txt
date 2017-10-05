@@ -1,5 +1,5 @@
 #*** The properties of the matching ***
-#Date of the computation:	2017/10/05 22:40:15
+#Date of the computation:	2017/10/05 22:48:48
 #Source graph set:	./data/Letter/small.xml (14 graphs)
 #Target graph set:	./data/Letter/small.xml (14 graphs)
 #Graph edit distance procedure:	AStar
@@ -14,7 +14,7 @@
 #Individual edge costs are added
 #(Combined node cost)^(1/2.0)
 #(Combined edge cost)^(1/1.0)
-#Complete Matching Time: 1029
+#Complete Matching Time: 1019
 #Number of Fails: 0
 #
 #*** The distance matrix ***
