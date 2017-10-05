@@ -1,0 +1,44 @@
+#*** The properties of the matching ***
+#Source graph set:	./data/Molecules/small.xml (5 graphs)
+#Target graph set:	./data/Molecules/small.xml (5 graphs)
+#Graph edit distance procedure:	Beam
+#s = 10
+#Edge mode:		undirected
+#Cost for node deletion/insertion:	3.0
+#Cost for edge deletion/insertion:	3.0
+#Alpha weighting factor between node and edge costs:	0.8
+#Node attribute 0:	chem;	Cost function:	discrete;	mu = 0 nu = 2;	Soft factor:	1.0
+#Node attribute 1:	charge;	Cost function:	absolute;	Soft factor:	0.3
+#Edge Attribute 0:	valence;	Cost Function:	squared;	Soft Factor:	1.0
+#Individual node costs are added
+#Individual edge costs are added
+#(Combined node cost)^(1/1.0)
+#(Combined edge cost)^(1/1.0)
+#Complete Matching Time: 58
+#Number of Fails: 0
+#*** The distance matrix ***
+0.00000
+6.80000
+14.40000
+15.80000
+15.80000
+6.80000
+0.00000
+13.80000
+15.20000
+12.40000
+15.40000
+13.80000
+0.00000
+7.80000
+10.00000
+17.20000
+18.00000
+16.00000
+0.00000
+9.60000
+17.00000
+12.60000
+10.60000
+9.00000
+0.00000

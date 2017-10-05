@@ -1,0 +1,44 @@
+#*** The properties of the matching ***
+#Source graph set:	./data/Fingerprint/small.xml (5 graphs)
+#Target graph set:	./data/Fingerprint/small.xml (5 graphs)
+#Graph edit distance procedure:	Hungarian
+#Edge mode:		undirected
+#Cost for node deletion/insertion:	1.0
+#Cost for edge deletion/insertion:	1.0
+#Alpha weighting factor between node and edge costs:	0.2
+#No attributes for nodes defined
+#Edge Attribute 0:	angle;	Cost Function:	absolute;	Soft Factor:	1.0
+#Individual node costs are added
+#Individual edge costs are added
+#(Combined node cost)^(1/1.0)
+#(Combined edge cost)^(1/1.0)
+#Complete Matching Time: 31
+#Number of Fails: 0
+
+*** The similarity matrix exp(-d) ***
+
+1.00000
+0.00469
+0.00747
+0.00013
+0.00452
+0.00469
+1.00000
+0.00038
+0.00027
+0.00022
+0.00747
+0.00038
+1.00000
+0.00030
+0.11080
+0.00000
+0.00027
+0.00030
+1.00000
+0.00203
+0.00452
+0.00022
+0.11080
+0.00203
+1.00000

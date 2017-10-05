@@ -13,10 +13,10 @@
 #########################################################################################
 # 	source and target graph set, pathes to the graph and result folder		#
 #########################################################################################
-source=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Fingerprint/small.cxl
-target=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Fingerprint/small.cxl
-path=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Fingerprint/
-result=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Fingerprint/
+source=./data/Fingerprint/small.xml
+target=./data/Fingerprint/small.xml
+path=./data/Fingerprint/
+result=./result/fingerprint
 
 
 #########################################################################################

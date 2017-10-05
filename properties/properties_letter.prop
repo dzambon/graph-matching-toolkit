@@ -13,10 +13,10 @@
 #########################################################################################
 # 	source and target graph set, pathes to the graph and result folder		#
 #########################################################################################
-source=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Letter/small.xml
-target=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Letter/small.xml
-path=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Letter/
-result=/Users/riesen/Documents/workspace2/GraphMatchingToolkit/data/Letter/
+source=./data/Letter/small.xml
+target=./data/Letter/small.xml
+path=./data/Letter/
+result=./result/letter
 
 
 #########################################################################################
