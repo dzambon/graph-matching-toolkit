@@ -174,6 +174,24 @@ public class CostFunction {
 							* this.nodeAttrImportance[i]);
 				}
 			}
+			
+			//dz: coma separated double values 
+			if (this.nodeCostTypes[i].equals("csvDouble")) {
+				double[] u_x= dzParseCSVDouble(u
+						.getValue(this.nodeAttributes[i]));
+				double[] v_x= dzParseCSVDouble(v
+						.getValue(this.nodeAttributes[i]));
+				double sum = 0;
+				for (int s = 0; s < u_x.length; s++) {
+				    sum += Math.pow((u_x[s] - v_x[s]), 2.);   
+				}
+				if (this.multiplyNodeCosts == 1) {
+					cost *= sum * this.nodeAttrImportance[i];
+				} else {
+					cost += sum * this.nodeAttrImportance[i];
+				}
+			}
+
 		}
 		
 		cost = Math.pow(cost, (1/this.pNode));
@@ -264,6 +282,24 @@ public class CostFunction {
 				}
 				
 			}
+
+			//dz: coma separated double values 
+			if (this.edgeCostTypes[i].equals("csvDouble")) {
+				double[] u_x= dzParseCSVDouble(u
+						.getValue(this.edgeAttributes[i]));
+				double[] v_x= dzParseCSVDouble(v
+						.getValue(this.edgeAttributes[i]));
+				double sum = 0;
+				for (int s = 0; s < u_x.length; s++) {
+				    sum += Math.pow((u_x[s] - v_x[s]), 2.);   
+			        }
+				if (this.multiplyEdgeCosts == 1) {
+					cost *= sum * this.edgeAttrImportance[i];
+				} else {
+					cost += sum * this.edgeAttrImportance[i];
+				}
+			}
+
 		}
 		
 		
@@ -326,5 +362,19 @@ public class CostFunction {
 
 	
 
+	//dz: 
+	static public double[] dzParseCSVDouble(String str){
+		String delims = "[\\[,\\]]";
+		String[] tokens = str.split(delims);
+	
+		int dim = tokens.length-1;
+		double[] x;
+		x = new double[dim];
+	
+		for (int i=0; i<dim; i++){
+			x[i] = Double.parseDouble(tokens[i+1]);
+		}
+		return x;
+	}
 
 }
