@@ -23,17 +23,16 @@ Run the graph matching as a java application. The main method is in `GraphMatchi
 
 ## Change Log
 
-All notable changes to the original code of Kaspar are here documented.
+Changes to the original code.
 
 #### 1.1.0 (2017-10-05) `b16d7f4`
-* Lighter consol output.
-* Exception handling to debug problem with parsing the properties file.
-* More details in the result file and.
+* More concise console output.
+* Exception handling: easier debug of issues related to parsing the properties files.
+* More details in the result file.
 * More comments about how to set the properties in `properties_letter.prop`.
 
 #### 1.0.1 (2017-06-27) `0b51e0f`
-* Implemented the cost function for `csvDouble`, namely attributes in the form `[double, double, ... , double]`.
-* Inserted this changelog in the README.
+* Implemented the cost function for `csvDouble` for attributes in the form `[double, double, ... , double]`.
 
 #### 1.0.0 (2017-01-30) `e833baa`
 * Version provided to me by Kaspar Riesen.
