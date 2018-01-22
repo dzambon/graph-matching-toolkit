@@ -124,7 +124,7 @@ public class GraphMatching {
 	 */
 	@SuppressWarnings("unused")
 	public static void main(String[] properties) {
-		System.out.println("--- GMT - v-1.1.0 ---");
+		System.out.println("--- GMT - v-1.1.0 - 05/10/2017 ---");
 		try {
 			GraphMatching graphMatching = new GraphMatching(properties[0]);
 		} catch (Exception e) {
