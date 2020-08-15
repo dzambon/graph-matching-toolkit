@@ -41,5 +41,4 @@ Changes to the original code.
 
 ### Discalimer
 
-The author of the source code is Kaspar Riesen. 
-Daniele Zambon ([dan-zam](https://github.com/dan-zam)) is only the owner of the github repository.
+Daniele Zambon ([dzambon](https://github.com/dzambon)) is just the owner of the github repository. The author of the source code is Kaspar Riesen. 
